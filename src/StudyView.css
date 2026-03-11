@@ -1,0 +1,173 @@
+.study-container {
+    padding: 2rem;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    min-height: 80vh;
+}
+
+.study-header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.small-back-btn {
+    background: transparent;
+    border: 1px solid var(--text-secondary);
+    color: var(--text-secondary);
+    padding: 0.3rem 0.8rem;
+    font-size: 0.8rem;
+}
+
+.progress-bar {
+    flex: 1;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    position: relative;
+    overflow: hidden;
+}
+
+.progress-inner {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    transition: width 0.3s ease;
+}
+
+.progress-bar span {
+    position: absolute;
+    right: 0;
+    top: -20px;
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+}
+
+/* 3D Card Flip Animation */
+.flip-card-container {
+    background-color: transparent;
+    width: 100%;
+    height: 380px;
+    perspective: 1000px;
+    cursor: pointer;
+}
+
+.flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-style: preserve-3d;
+}
+
+.flipped .flip-card-inner {
+    transform: rotateY(180deg);
+}
+
+.flip-card-front, .flip-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    pointer-events: none;
+}
+
+.flip-card-front {
+    z-index: 2;
+}
+
+.flipped .flip-card-front {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.flip-card-back {
+    transform: rotateY(180deg);
+    opacity: 0;
+    visibility: hidden;
+}
+
+.flipped .flip-card-back {
+    opacity: 1;
+    visibility: visible;
+}
+
+.card-label {
+    position: absolute;
+    top: 1.5rem;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1rem;
+    color: var(--text-secondary);
+}
+
+.card-text {
+    width: 100%;
+    font-size: 2.5rem;
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--text-primary);
+    word-break: break-word;
+}
+
+.tap-hint {
+    position: absolute;
+    bottom: 1.5rem;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    opacity: 0.6;
+}
+
+.feedback-section {
+    width: 100%;
+    text-align: center;
+}
+
+.feedback-buttons {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+@media (min-width: 600px) {
+    .feedback-buttons {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+.fb-btn {
+    padding: 1rem 0.5rem;
+    font-size: 0.9rem;
+    border: none;
+}
+
+.fb-btn.again { background-color: var(--btn-again); }
+.fb-btn.hard { background-color: var(--btn-hard); }
+.fb-btn.good { background-color: var(--btn-good); }
+.fb-btn.easy { background-color: var(--btn-easy); }
+
+.fb-btn:hover {
+    transform: translateY(-3px);
+    filter: brightness(1.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.complete-card {
+    padding: 4rem 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    width: 100%;
+}

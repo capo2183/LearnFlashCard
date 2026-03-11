@@ -1,0 +1,146 @@
+.app-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 80vh;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.hero-section {
+  margin-bottom: 3rem;
+}
+
+.hero-subtitle {
+  font-size: 1.25rem;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.login-card {
+  padding: 3rem 2rem;
+  width: 100%;
+  max-width: 480px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.google-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  background-color: white;
+  color: #1f2937;
+  font-weight: 600;
+  font-size: 1.05rem;
+  width: 100%;
+  padding: 0.8em 1.5em;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.google-btn:hover {
+  background-color: #f9fafb;
+  box-shadow: 0 6px 12px rgba(255, 255, 255, 0.15);
+}
+
+.google-icon {
+  width: 24px;
+  height: 24px;
+}
+
+.features-list {
+  text-align: left;
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  color: var(--text-secondary);
+}
+
+.feature-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.feature-icon {
+  color: var(--success-color, #10b981);
+}
+
+/* Dashboard Styles */
+.main-dashboard {
+  padding: 3rem 2rem;
+  width: 100%;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.status-text {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.success-tag {
+  color: #10b981;
+  font-weight: 700;
+  background: rgba(16, 185, 129, 0.1);
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+}
+
+.loading-tag {
+  color: #f59e0b;
+  font-weight: 700;
+  background: rgba(245, 158, 11, 0.1);
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+}
+
+.dashboard-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.dashboard-btn {
+  flex: 1;
+  padding: 1rem;
+  font-size: 1.1rem;
+}
+
+.dashboard-btn.secondary {
+  background-color: transparent;
+  border: 1px solid var(--primary-color);
+  color: var(--primary-color);
+}
+
+.dashboard-btn.secondary:hover {
+  background-color: rgba(59, 130, 246, 0.1);
+}
+
+.logout-link {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  text-decoration: underline;
+  cursor: pointer;
+  margin-top: 2rem;
+  padding: 0;
+  font-size: 0.9rem;
+}
+
+.logout-link:hover {
+  color: var(--text-primary);
+  background: none;
+  transform: none;
+  box-shadow: none;
+}
+
