@@ -50,7 +50,7 @@ export const initGoogleServices = () => {
     });
 };
 
-export const signIn = () => {
+export const signIn = (loginHint = '') => {
     return new Promise((resolve, reject) => {
         try {
             tokenClient.callback = async (resp) => {
@@ -65,11 +65,11 @@ export const signIn = () => {
                 resolve(resp);
             };
 
-            if (window.gapi.client.getToken() === null) {
-                tokenClient.requestAccessToken({ prompt: 'consent' });
-            } else {
-                tokenClient.requestAccessToken({ prompt: '' });
+            const options = { prompt: '' };
+            if (loginHint) {
+                options.login_hint = loginHint;
             }
+            tokenClient.requestAccessToken(options);
         } catch (err) {
             console.error("SignIn Error:", err);
             reject(err);
@@ -84,11 +84,13 @@ export const signOut = () => {
             window.gapi.client.setToken('');
             localStorage.removeItem('flashcard_token');
             localStorage.removeItem('flashcard_user');
+            localStorage.removeItem('flashcard_user_email');
             window.location.reload();
         });
     } else {
         localStorage.removeItem('flashcard_token');
         localStorage.removeItem('flashcard_user');
+        localStorage.removeItem('flashcard_user_email');
         window.location.reload();
     }
 };

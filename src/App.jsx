@@ -35,7 +35,7 @@ function App() {
             });
           } else {
             localStorage.removeItem('flashcard_token');
-            localStorage.removeItem('flashcard_user');
+            setUser(savedUser);
           }
         }
       })
@@ -53,7 +53,8 @@ function App() {
 
     try {
       setLoadingStatus("登入授權中...");
-      const tokenResponse = await signIn();
+      const savedEmail = localStorage.getItem('flashcard_user_email') || '';
+      const tokenResponse = await signIn(savedEmail);
       if (tokenResponse && tokenResponse.access_token) {
         setIsSignedIn(true);
         const profile = await getUserInfo(tokenResponse.access_token);
@@ -67,6 +68,9 @@ function App() {
         };
         localStorage.setItem('flashcard_token', JSON.stringify(tokenToSave));
         localStorage.setItem('flashcard_user', userName);
+        if (profile.email) {
+          localStorage.setItem('flashcard_user_email', profile.email);
+        }
 
         setLoadingStatus("連線資料庫中...");
         const id = await findOrCreateSpreadsheet();
@@ -95,11 +99,11 @@ function App() {
 
       {!isSignedIn ? (
         <div className="glass-panel login-card">
-          <h2>開始您的旅程</h2>
+          <h2>{user ? `歡迎回來，${user}` : '開始您的旅程'}</h2>
           {!isGapiReady ? (
             <p className="loading-text">{loadingStatus}</p>
           ) : (
-            <p>請授權 Google 帳號以存取您的試算表</p>
+            <p>{user ? '您的登入狀態已過期，請重新連線以存取試算表' : '請授權 Google 帳號以存取您的試算表'}</p>
           )}
           
           <button 
