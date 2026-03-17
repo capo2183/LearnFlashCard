@@ -80,26 +80,16 @@
     align-items: center;
     padding: 2rem;
     pointer-events: none;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
 }
 
 .flip-card-front {
     z-index: 2;
 }
 
-.flipped .flip-card-front {
-    opacity: 0;
-    visibility: hidden;
-}
-
 .flip-card-back {
     transform: rotateY(180deg);
-    opacity: 0;
-    visibility: hidden;
-}
-
-.flipped .flip-card-back {
-    opacity: 1;
-    visibility: visible;
 }
 
 .card-label {
