@@ -95,14 +95,26 @@ const FlashcardManager = ({ spreadsheetId, onBack }) => {
             </div>
 
             <div className="cards-list-section">
-                <h3>您的單字清單 ({cards.length})</h3>
+                <div className="list-header">
+                    <h3>您的單字清單 (僅顯示最近10筆)</h3>
+                </div>
+                <div className="list-actions">
+                    <a 
+                        href={`https://docs.google.com/spreadsheets/d/${spreadsheetId}/edit`} 
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                        className="google-sheet-link"
+                    >
+                        前往 Google Sheet ↗
+                    </a>
+                </div>
                 {loading ? (
                     <p className="loading-text">載入中...</p>
                 ) : cards.length === 0 ? (
                     <p className="empty-text">目前還沒有單字，快新增一個吧！</p>
                 ) : (
                     <div className="cards-grid">
-                        {cards.map((card) => (
+                        {[...cards].reverse().slice(0, 10).map((card) => (
                             <div key={card.id} className="glass-panel card-item">
                                 <div className="card-content">
                                     <div className="card-front">{card.front}</div>

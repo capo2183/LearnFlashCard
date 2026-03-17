@@ -76,6 +76,28 @@
     font-size: 1.1rem;
 }
 
+.list-header {
+    margin-bottom: 0.5rem;
+}
+
+.list-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 1.5rem;
+}
+
+.google-sheet-link {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.google-sheet-link:hover {
+    color: white;
+    text-decoration: underline;
+}
+
 .cards-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
