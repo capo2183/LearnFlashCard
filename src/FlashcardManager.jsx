@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { getAllCards, saveNewCard, deleteCardByRow } from './googleService';
+import { parseFurigana } from './utils';
 import './FlashcardManager.css';
 
 const FlashcardManager = ({ spreadsheetId, onBack }) => {
@@ -117,8 +118,8 @@ const FlashcardManager = ({ spreadsheetId, onBack }) => {
                         {[...cards].reverse().slice(0, 10).map((card) => (
                             <div key={card.id} className="glass-panel card-item">
                                 <div className="card-content">
-                                    <div className="card-front">{card.front}</div>
-                                    <div className="card-back">{card.back}</div>
+                                    <div className="card-front">{parseFurigana(card.front)}</div>
+                                    <div className="card-back">{parseFurigana(card.back)}</div>
                                 </div>
                                 <button className="delete-btn" onClick={() => handleDelete(card.rowIndex)}>刪除</button>
                             </div>

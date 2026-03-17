@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { getAllCards, updateCardProgress } from './googleService';
 import { calculateSM2 } from './sm2';
+import { parseFurigana } from './utils';
 import './StudyView.css';
 
 const StudyView = ({ spreadsheetId, onBack }) => {
@@ -111,12 +112,12 @@ const StudyView = ({ spreadsheetId, onBack }) => {
                 <div className="flip-card-inner">
                     <div className="flip-card-front glass-panel">
                         <div className="card-label">單字</div>
-                        <div className="card-text">{currentCard.front || "內容為空"}</div>
+                        <div className="card-text">{parseFurigana(currentCard.front) || "內容為空"}</div>
                         <div className="tap-hint">點擊翻面</div>
                     </div>
                     <div className="flip-card-back glass-panel">
                         <div className="card-label">解釋</div>
-                        <div className="card-text">{currentCard.back || "內容為空"}</div>
+                        <div className="card-text">{parseFurigana(currentCard.back) || "內容為空"}</div>
                     </div>
                 </div>
             </div>
