@@ -232,3 +232,39 @@ export const findOrCreateSpreadsheet = async () => {
         return spreadsheetId;
     }
 };
+
+export const initializeIncompleteCards = async (spreadsheetId, cardsToInit) => {
+    if (!cardsToInit || cardsToInit.length === 0) return 0;
+
+    const data = cardsToInit.map(card => {
+        const newId = crypto.randomUUID();
+        const nextReviewDate = new Date(Date.now() - 60000).toISOString();
+        
+        return {
+            range: `A${card.rowIndex}:G${card.rowIndex}`,
+            values: [[
+                newId,
+                card.front,
+                card.back,
+                0, // interval
+                0, // repetition
+                2.5, // efactor
+                nextReviewDate
+            ]]
+        };
+    });
+
+    try {
+        await window.gapi.client.sheets.spreadsheets.values.batchUpdate({
+            spreadsheetId,
+            resource: {
+                valueInputOption: 'RAW',
+                data: data
+            }
+        });
+        return cardsToInit.length;
+    } catch (err) {
+        console.error("Initialize Cards Error:", err);
+        return 0;
+    }
+};

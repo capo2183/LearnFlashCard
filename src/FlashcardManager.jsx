@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { getAllCards, saveNewCard, deleteCardByRow } from './googleService';
+import { getAllCards, saveNewCard, deleteCardByRow, initializeIncompleteCards } from './googleService';
 import { parseFurigana } from './utils';
 import './FlashcardManager.css';
 
@@ -9,6 +9,7 @@ const FlashcardManager = ({ spreadsheetId, onBack }) => {
     const [front, setFront] = useState('');
     const [back, setBack] = useState('');
     const [adding, setAdding] = useState(false);
+    const [initializedCount, setInitializedCount] = useState(0);
 
     useEffect(() => {
         fetchCards();
@@ -16,7 +17,17 @@ const FlashcardManager = ({ spreadsheetId, onBack }) => {
 
     const fetchCards = async () => {
         setLoading(true);
-        const fetchedCards = await getAllCards(spreadsheetId);
+        let fetchedCards = await getAllCards(spreadsheetId);
+        
+        const cardsToInit = fetchedCards.filter(card => !card.id);
+        if (cardsToInit.length > 0) {
+            const count = await initializeIncompleteCards(spreadsheetId, cardsToInit);
+            setInitializedCount(count);
+            fetchedCards = await getAllCards(spreadsheetId);
+        } else {
+            setInitializedCount(0);
+        }
+
         setCards(fetchedCards);
         setLoading(false);
     };
@@ -99,6 +110,11 @@ const FlashcardManager = ({ spreadsheetId, onBack }) => {
                 <div className="list-header">
                     <h3>您的單字清單 (僅顯示最近10筆)</h3>
                 </div>
+                {initializedCount > 0 && (
+                    <div className="initialized-message" style={{ color: '#ff4d4f', marginBottom: '1rem', fontSize: '0.9rem', fontWeight: 'bold' }}>
+                        已初始化 {initializedCount} 筆資料
+                    </div>
+                )}
                 <div className="list-actions">
                     <a 
                         href={`https://docs.google.com/spreadsheets/d/${spreadsheetId}/edit`} 
